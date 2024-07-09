@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %} Attendence {% endblock title %}
+
+
+{% block head %}
+<h1> Apply Attendence</h1>
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        {%  for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+      </div>
+
+      {% endfor %}
+
+      <form action="" method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+          <input type="number" class="form-control mt-2" value="{{user.username}}" name="phonenumber" placeholder="Enter Your Phone number" readonly required>            
+        </div>
+       
+          <div class="form-group">
+            <select class="form-control mt-2" name="workout" id="workout">
+                <option selected>Select WorkOut</option>
+                <option value="Biceps">Biceps</option>
+                <option value="Triceps">Triceps</option>
+                <option value="Shoulders">Shoulders</option>
+                <option value="Chest">Chest</option>
+                <option value="ABS">ABS</option>
+                <option value="Back">Back</option>
+                <option value="Treadmill">Treadmill</option>
+                <option value="WarmUp">WarmUp</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="Logintime" class="text-white">Log In</label>
+            <input type="time" class="form-control mt-2" name="login" id="logintime" placeholder="Login Time" required>            
+          </div>
+          <div class="form-group">
+            <label for="Logouttime" class="text-white">LogOut</label>
+            <input type="time" class="form-control mt-2" name="logout" id="logouttime" placeholder="Logout Time" required>            
+          </div>
+
+          <div class="form-group">
+            <select class="form-control mt-2" name="trainer" id="trainer">
+                <option selected>Select Trainer</option>
+                {% for t in trainer %}
+                <option value="{{t.trainer_name}}">{{t.trainer_name}}</option>
+                {% endfor %}                
+            </select>
+          </div>
+
+          <br>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-warning">Apply Attendence</button>
+          </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+
+    
+{% endblock head %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %} Enrollment for GYM {% endblock title %}
+
+
+{% block head %}
+<h1> Enroll</h1>
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        {%  for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+      </div>
+
+      {% endfor %}
+
+      <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <input type="text" class="form-control mb-2" name="fullname" placeholder="Enter Your Fullname" required>            
+        </div>
+
+          <div class="form-group">
+            <input type="email" class="form-control mt-2" value="{{user.email}}" name="email" placeholder="Enter Your Email" readonly required>            
+          </div>
+          <div class="form-group">
+            <select class="form-control mt-2" name="gender" id="gender">
+                <option selected>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <input type="number" class="form-control mt-2" value="{{user.username}}" name="phonenumber" placeholder="Enter Your Phone number" readonly required>            
+          </div>
+          <div class="form-group">
+            <input type="date" class="form-control mt-2" name="dob" placeholder="Enter Your Date of Birth" required>            
+          </div>
+
+          <div class="form-group">
+            <select class="form-control mt-2" name="member" id="member">
+                <option selected>Select Membership Plan</option>
+                {% for p in membership %}
+                <option value="{{p.plan}} - {{p.price}}">{{p.plan}} - {{p.price}} RS</option>
+                {% endfor %}                
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control mt-2" name="trainer" id="trainer">
+                <option selected>Select Trainer</option>
+                {% for t in trainer %}
+                <option value="{{t.trainer_name}}">{{t.trainer_name}}</option>
+                {% endfor %}                
+            </select>
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-control mt-2" name="referance" placeholder="Refered By">            
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control mt-2" name="address" placeholder="Address">            
+          </div>
+          <br>          
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-warning">Enroll</button>
+          </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+
+    
+{% endblock head %}
